@@ -76,3 +76,23 @@ jobs:
           docker tag tasks-api:${{ github.sha }} ${IMAGE_LC}:${{ github.sha }}
           docker push ${IMAGE_LC}:latest
           docker push ${IMAGE_LC}:${{ github.sha }}
+
+      - name: Deploy a Render
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+          echo "Deploy disparado — esperando que Render levante..."
+          HEALTHY=false
+          for i in {1..18}; do
+            if curl -sf https://tasks-api-f4b9.onrender.com/actuator/health | grep -q '"status":"UP"'; then
+              echo "Deploy exitoso — https://tasks-api-f4b9.onrender.com"
+              HEALTHY=true
+              break
+            fi
+            echo "Intento $i/18 — reintentando en 10s..."
+            sleep 10
+          done
+          if [ "$HEALTHY" = "false" ]; then
+            echo "Render no respondió después de 3 minutos"
+            exit 1
+          fi
