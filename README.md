@@ -15,7 +15,7 @@ API REST de gestión de tareas construida con **Java 21 + Spring Boot 3**, docke
 | Framework | Spring Boot 3.2 |
 | Persistencia | Spring Data JPA + H2 (in-memory) |
 | Validación | Jakarta Validation |
-| Observabilidad | Spring Actuator |
+| Observabilidad | Spring Actuator + Micrometer (Prometheus) |
 | Contenedor | Docker (multi-stage build) |
 | Registry | GHCR (GitHub Container Registry) |
 | CI/CD | GitHub Actions |
@@ -110,6 +110,7 @@ mvn spring-boot:run -Dspring.profiles.active=dev
 | `PUT` | `/api/tasks/{id}` | Actualizar tarea |
 | `DELETE` | `/api/tasks/{id}` | Eliminar tarea |
 | `GET` | `/actuator/health` | Health check del contenedor |
+| `GET` | `/actuator/prometheus` | Métricas para Prometheus/Grafana |
 
 ### Estados posibles
 
