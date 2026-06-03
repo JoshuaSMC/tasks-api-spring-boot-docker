@@ -1,9 +1,19 @@
 # 🐳 tasks-api
 
+![CI](https://github.com/JoshuaSMC/tasks-api-spring-boot-docker/actions/workflows/ci.yml/badge.svg)
+![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen?logo=springboot)
+![Docker](https://img.shields.io/badge/Docker-multi--stage-blue?logo=docker)
+![GHCR](https://img.shields.io/badge/GHCR-published-blueviolet?logo=github)
+![Live](https://img.shields.io/badge/Live-Render-46E3B7?logo=render)
+
 API REST de gestión de tareas construida con **Java 21 + Spring Boot 3**, dockerizada con multi-stage build y publicada en GHCR mediante un pipeline CI/CD con GitHub Actions.
 
 > **Repo 1 de 3 — Portfolio DevOps/Cloud**
 > Este repo es la aplicación base. El deploy automatizado y el monitoreo se encuentran en [`devops-pipeline-github-actions-grafana`](https://github.com/JoshuaSMC/devops-pipeline-github-actions-grafana).
+
+> 🟢 **Live:** https://tasks-api-f4b9.onrender.com/api/tasks
+> 📄 **Swagger UI:** https://tasks-api-f4b9.onrender.com/swagger-ui.html
 
 ---
 
@@ -111,6 +121,7 @@ mvn spring-boot:run -Dspring.profiles.active=dev
 | `DELETE` | `/api/tasks/{id}` | Eliminar tarea |
 | `GET` | `/actuator/health` | Health check del contenedor |
 | `GET` | `/actuator/prometheus` | Métricas para Prometheus/Grafana |
+| `GET` | `/swagger-ui.html` | Documentación interactiva de la API |
 
 ### Estados posibles
 
