@@ -34,6 +34,7 @@ public class TaskService {
                 .orElseThrow(() -> new NoSuchElementException("Tarea no encontrada: " + id));
     }
 
+    @Transactional
     public TaskDto.Response create(TaskDto.Request request) {
         Task task = new Task();
         task.setTitle(request.getTitle());
