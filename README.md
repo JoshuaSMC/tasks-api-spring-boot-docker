@@ -70,6 +70,29 @@ Este proyecto forma parte de una trilogía que cubre el flujo DevOps completo:
 
 ---
 
+## 🌐 Probalo sin clonar
+
+La API está desplegada en Render. Podés probarla directamente:
+
+```bash
+# Health check
+curl https://tasks-api-f4b9.onrender.com/actuator/health
+
+# Listar tareas
+curl https://tasks-api-f4b9.onrender.com/api/tasks
+
+# Crear una tarea
+curl -X POST https://tasks-api-f4b9.onrender.com/api/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Mi tarea", "description": "Descripción"}'
+```
+
+> O explorá la API visualmente en el **[Swagger UI](https://tasks-api-f4b9.onrender.com/swagger-ui.html)** ← sin instalar nada
+
+![Swagger UI](assets/swagger-ui.png)
+
+---
+
 ## 🚀 Instalación local
 
 ### 🧩 Requisitos previos
@@ -171,8 +194,11 @@ El pipeline en `.github/workflows/ci.yml` se ejecuta en cada push a `main` o `de
 |------|------------|
 | Build + test | `mvn verify` — compila y corre los 5 tests |
 | Docker build | Construye la imagen multi-stage con `load: true` |
-| Smoke test | Levanta el contenedor y verifica `/actuator/health` con retry y fallo explícito |
+| Smoke test local | Levanta el contenedor y verifica `/actuator/health` con retry y fallo explícito |
 | Push a GHCR | Publica `ghcr.io/joshuasmc/tasks-api:latest` (solo en `main`) |
+| Deploy a Render | Dispara el deploy hook y verifica `"status":"UP"` con retry de 3 minutos |
+
+![GitHub Actions pipeline](assets/pipeline-ci.png)
 
 ---
 
